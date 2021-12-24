@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Section from './Section';
@@ -6,18 +6,23 @@ import Statistics from './Statistics';
 import FeedbackOptions from './FeedbackOptions';
 import Notification from './Notification';
 
-class Feedback extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
-  };
+
+function Feedback()=> {
+  const [good, setGood] = useState(0);
+  const [neutral,setNeutral] = useState(0);
+  const [bad,setBad] = useState(0);
+
+  // state = {
+  //   good: 0,
+  //   neutral: 0,
+  //   bad: 0,
+  // };
   countTotalFeedback() {
-    const { good, neutral, bad } = this.state;
+    // const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   }
   countPositiveFeedbackPercentage() {
-    const { good } = this.state;
+    // const { good } = this.state;
 
     return Math.round((good / this.countTotalFeedback()) * 100) / 100;
   }
