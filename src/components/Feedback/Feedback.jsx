@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Section from './Section';
@@ -11,16 +11,11 @@ function Feedback() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  // useEffect(() => { good + neutral + bad },[good,neutral,bad]);
-
   const countTotalFeedback = () => {
-    // const { good, neutral, bad } = this.state;
     return good + neutral + bad;
   };
 
   const countPositiveFeedbackPercentage = () => {
-    // const { good } = this.state;
-
     return Math.round((good / countTotalFeedback()) * 100) / 100;
   };
 
