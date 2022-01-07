@@ -7,9 +7,9 @@ import FeedbackOptions from './FeedbackOptions';
 import Notification from './Notification';
 
 function Feedback() {
-  const [good, setGood] = useState(0);
-  const [neutral, setNeutral] = useState(0);
-  const [bad, setBad] = useState(0);
+  const [feedbackState, setfeedbackState] = useState({ good: 0, neutral: 0, bad: 0 });
+
+  const { good, neutral, bad } = feedbackState;
 
   const countTotalFeedback = () => {
     return good + neutral + bad;
@@ -20,19 +20,7 @@ function Feedback() {
   };
 
   const leaveFeedbackHandle = name => {
-    switch (name) {
-      case 'good':
-        setGood(prevstate => prevstate + 1);
-        break;
-      case 'neutral':
-        setNeutral(prevstate => prevstate + 1);
-        break;
-      case 'bad':
-        setBad(prevstate => prevstate + 1);
-        break;
-      default:
-        return;
-    }
+    setfeedbackState(prevstate => ({ ...prevstate, [name]: prevstate[name] + 1 }));
   };
 
   const element = !countTotalFeedback() ? (
@@ -51,7 +39,7 @@ function Feedback() {
     <>
       <Section title="Please leave feedback">
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
+          options={Object.keys(feedbackState)}
           onLeaveFeedback={leaveFeedbackHandle}
         />
       </Section>
@@ -61,9 +49,3 @@ function Feedback() {
 }
 
 export default Feedback;
-
-Feedback.propTypes = {
-  good: PropTypes.string,
-  neutral: PropTypes.string,
-  bad: PropTypes.string,
-};
